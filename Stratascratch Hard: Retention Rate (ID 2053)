@@ -1,0 +1,69 @@
+Stratascratch Hard: Retention Rate (ID 2053)
+
+You are given a dataset that tracks user activity. The dataset includes information about the date of user activity, the account_id associated with the activity, and the user_id of the user performing the activity. Each row in the dataset represents a user’s activity on a specific date for a particular account_id.
+
+
+Your task is to calculate the monthly retention rate for users for each account_id for December 2020 and January 2021. The retention rate is defined as the percentage of users active in a given month who have activity in any future month.
+
+
+For instance, a user is considered retained for December 2020 if they have activity in December 2020 and any subsequent month (e.g., January 2021 or later). Similarly, a user is retained for January 2021 if they have activity in January 2021 and any later month (e.g., February 2021 or later).
+
+
+The final output should include the account_id and the ratio of the retention rate in January 2021 to the retention rate in December 2020 for each account_id. If there are no users retained in December 2020, the retention rate ratio should be set to 0.
+
+
+sf_events
+
+account_id:
+character varying
+record_date:
+date
+user_id:
+character varying
+
+## My query solution:
+
+With dec_activity as(
+select account_id, count(record_date) as activity_count_dec from sf_events
+where record_date BETWEEN '2020-12-01' AND '2020-12-31' 
+group by account_id
+), 
+jan_activity as(
+select account_id, count(record_date) as activity_count_dec from sf_events
+where record_date BETWEEN '2021-01-01' AND '2021-01-31' 
+group by account_id
+),
+after_dec as(
+select account_id, count(record_date) as activity_count_after from sf_events
+where record_date > '2020-12-31' 
+group by account_id
+), 
+after_jan as(
+select account_id, count(record_date) as activity_count_after from sf_events
+where record_date > '2021-01-31' 
+group by account_id
+), 
+retained_jan as(
+select j.account_id, count(*) as all_jan_usrs, count(aj.account_id) as retained_jan from jan_activity j left JOIN after_jan aj on aj.account_id= j.account_id
+group by j.account_id
+), 
+retained_dec as(
+select d.account_id, count(*) as all_dec_usrs, count(ad.account_id) as retained_dec from dec_activity d left JOIN after_dec ad on ad.account_id= d.account_id
+group by d.account_id
+)
+
+select coalesce(d.account_id, j.account_id), 
+CASE WHEN all_dec_usrs=0 then 0
+else (CAST(j.retained_jan as DECIMAL)/NULLIF(j.all_jan_usrs, 0))/
+    (CAST(d.retained_dec as DECIMAL)/NULLIF(d.all_dec_usrs, 0)) 
+end as retention_ration
+from retained_dec d
+FULL OUTER JOIN retained_jan j on d.account_id= j.account_id
+
+##output:
+
+coalesce	retention_ration
+A1	1
+A2	1
+A3	0
+
