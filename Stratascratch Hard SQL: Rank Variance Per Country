@@ -1,0 +1,55 @@
+## Stratascratch Hard SQL
+
+Rank Variance Per Country (ID 2007)
+
+Which countries have risen in the rankings based on the number of comments between Dec 2019 vs Jan 2020? Hint: Avoid gaps between ranks when ranking countries.
+
+Schema:
+fb_comments_count
+created_at:
+date
+number_of_comments:
+bigint
+user_id:
+bigint
+
+fb_active_users
+country:
+text
+name:
+text
+status:
+text
+user_id:
+bigint
+
+## My query Solution:
+
+with dec as(
+select fa.country, sum(fc.number_of_comments) AS comment_count, DENSE_RANK() OVER(order by SUM(fc.number_of_comments) desc) as rnk_dec from fb_comments_count fc
+RIGHT JOIN fb_active_users fa on fa.user_id= fc.user_id
+where fc.created_at BETWEEN '2019-12-01' and '2019-12-31'
+GROUP BY fa.country
+), 
+jan as(
+select fa.country, sum(fc.number_of_comments) AS comment_count, DENSE_RANK() OVER(order by SUM(fc.number_of_comments) desc) as rnk_jan from fb_comments_count fc
+RIGHT JOIN fb_active_users fa on fa.user_id= fc.user_id
+where fc.created_at BETWEEN '2020-01-01' and '2020-01-31'
+GROUP BY fa.country
+)
+
+SELECT j.country AS Country FROM jan j
+JOIN dec d ON j.country= d.country
+Where rnk_jan>rnk_dec
+
+## Result:
+
+Output
+
+Execution time: 0.00751 seconds
+
+country
+USA
+China
+Australia
+Brazil
