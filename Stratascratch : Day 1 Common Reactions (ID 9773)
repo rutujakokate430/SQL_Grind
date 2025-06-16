@@ -1,0 +1,46 @@
+Stratascratch : Day 1 Common Reactions (ID 9773)
+Find the most common reaction for day 1 by counting the number of occurrences for each reaction. Output the reaction alongside its number of occurrences.
+
+Table: facebook_reactions
+
+poster	friend	reaction	date_day	post_id
+2	1	like	1	0
+2	6	like	1	0
+1	2	like	1	1
+1	3	heart	1	1
+1	4	like	1	1
+1	5	heart	1	1
+1	6	like	1	1
+2	1	like	2	2
+2	6	like	2	2
+1	2	like	2	3
+1	3	like	2	3
+1	4	like	2	3
+1	5	like	2	3
+1	6	like	2	3
+2	1	laugh	1	0
+2	6	laugh	1	1
+1	2	laugh	1	0
+1	3	laugh	1	3
+1	4	laugh	1	4
+date_day:
+bigint
+friend:
+bigint
+post_id:
+bigint
+
+
+select reaction, count(*) as total_reactions from facebook_reactions
+where date_day=1
+group by reaction
+order by total_reactions desc
+
+reaction	total_reactions
+laugh	5
+like	5
+heart	2
+poster:
+bigint
+reaction:
+text
