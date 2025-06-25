@@ -1,0 +1,49 @@
+Stratascratch: Apple Easy: Customer Details
+
+Find the details of each customer regardless of whether the customer made an order. Output the customer's first name, last name, and the city along with the order details.
+Sort records based on the customer's first name and the order details in ascending order.
+
+Tables
+customers
+orders
+More about this question
+Hints
+Expected Output
+All required columns and the first 5 rows of the solution are shown
+
+first_name	last_name	city	order_details
+Emma	Isaac	Miami	
+Eva	Lucas	Arizona	Coat
+Eva	Lucas	Arizona	Shirts
+Eva	Lucas	Arizona	Slipper
+Farida	Joseph	San Francisco	Cap
+customers
+Preview
+address:
+text
+city:
+text
+first_name:
+text
+id:
+bigint
+last_name:
+text
+phone_number:
+text
+orders
+Preview
+cust_id:
+bigint
+id:
+bigint
+order_date:
+date
+order_details:
+text
+total_order_cost:
+bigint
+
+select first_name, last_name, city, order_details from customers C
+left join orders o ON o.cust_id= c.id
+order by first_name, order_details asc
