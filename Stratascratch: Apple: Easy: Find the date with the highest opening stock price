@@ -1,0 +1,26 @@
+Stratascratch: Apple: Easy: Find the date with the highest opening stock price
+
+Find the date when Apple's opening stock price reached its maximum
+
+Table
+aapl_historical_stock_price
+More about this question
+Hints
+Expected Output
+aapl_historical_stock_price
+Preview
+date	year	month	open	high	low	close	volume	id
+2012-12-31	2012	12	510.53	506.5	509	532.17	23553255	273
+2012-12-28	2012	12	510.29	506.5	508.12	509.59	12652749	274
+2012-12-27	2012	12	513.54	506.5	504.66	515.06	
+
+## Solution:
+
+select date from aapl_historical_stock_price
+order by open desc
+limit 1
+
+## Output:
+
+date
+2012-09-21
