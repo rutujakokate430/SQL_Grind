@@ -1,0 +1,36 @@
+Stratascratch Medium: Days Without HiringTermination
+
+Write a query to calculate the longest period (in days) that the company has gone without hiring anyone. Also, calculate the longest period without firing anyone. Limit yourself to dates inside the table (last hiring/termination date should be the latest hiring /termination date from table), don't go into future.
+
+Table
+uber_employees
+More about this question
+Hints
+Expected Output
+uber_employees
+Preview
+first_name:
+text
+hire_date:
+date
+id:
+bigint
+last_name:
+text
+salary:
+bigint
+termination_date:
+date
+
+with hiring_dates as(
+    select hire_date, lag(hire_date) over(ORDER BY hire_date) as prev_hire, termination_date, lag(termination_date) over(ORDER BY termination_date) as prev_term from uber_employees
+), hiring_diff as (
+    select datediff(hire_date, prev_hire) as hiring_period, datediff(termination_date, prev_term) as term_diff from hiring_dates
+    where prev_hire is not null OR prev_term is not null
+)
+
+select max(hiring_period) as longest_hire, max(term_diff) as longest_term from hiring_diff
+
+
+longest_hire	longest_term
+269	337
