@@ -1,0 +1,26 @@
+Stratascratch Medium: Finding Purchases ID 10553
+
+Identify returning active users by finding users who made a second purchase within 7 days of any previous purchase. Output a list of these user_ids.
+
+Table
+amazon_transactions
+
+amazon_transactions
+Preview
+created_at:
+date
+id:
+bigint
+item:
+text
+revenue:
+bigint
+user_id:
+bigint
+
+WITH curr_prev_tx as (
+select user_id, created_at, lag(created_at) over(partition by user_id order by created_at) AS prev_tx from amazon_transactions
+)
+
+select distinct user_id from curr_prev_tx
+where prev_tx IS NOT NULL AND datediff(created_at, prev_tx)<=7
