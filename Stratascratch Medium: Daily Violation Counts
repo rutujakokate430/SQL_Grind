@@ -1,0 +1,95 @@
+Stratascratch Medium: Daily Violation Counts
+
+Determine the change in the number of daily violations by calculating the difference between the count of current and previous violations by inspection date.
+Output the inspection date and the change in the number of daily violations. Order your results by the earliest inspection date first.
+
+Table
+sf_restaurant_health_violations
+More about this question
+Hints
+Expected Output
+sf_restaurant_health_violations
+Preview
+business_address:
+text
+business_city:
+text
+business_id:
+bigint
+business_latitude:
+double precision
+business_location:
+text
+business_longitude:
+double precision
+business_name:
+text
+business_phone_number:
+double precision
+business_postal_code:
+double precision
+business_state:
+text
+inspection_date:
+date
+inspection_id:
+text
+inspection_score:
+double precision
+inspection_type:
+text
+risk_category:
+text
+violation_description:
+text
+violation_id:
+text
+
+WITH volations as (
+select inspection_date, count(*) as voilation_cnt from sf_restaurant_health_violations
+group by inspection_date
+), with_lag as (
+    select inspection_date, voilation_cnt, LAG(voilation_cnt) over(order by inspection_date) as prev_voilation_cnt from volations
+)
+select inspection_date, voilation_cnt- COALESCE(prev_voilation_cnt, 0) as change_in_voilations from with_lag
+
+inspection_date	change_in_voilations
+2015-09-08	1
+2015-09-15	0
+2015-09-18	0
+2015-09-23	0
+2015-09-28	0
+2015-09-30	6
+2015-10-01	-6
+2015-11-17	0
+2015-11-19	0
+2015-12-02	0
+2015-12-07	0
+2015-12-24	0
+2016-01-06	0
+2016-01-07	0
+2016-01-29	0
+2016-02-01	0
+2016-02-02	1
+2016-02-05	-1
+2016-02-11	0
+2016-02-12	0
+2016-02-16	1
+2016-02-18	-1
+2016-02-29	0
+2016-03-03	0
+2016-03-15	0
+2016-03-16	1
+2016-03-24	-1
+2016-03-28	0
+2016-03-31	0
+2016-04-12	0
+2016-04-13	0
+2016-05-02	0
+2016-05-04	0
+2016-05-09	0
+2016-05-10	0
+2016-05-13	0
+2016-05-18	0
+2016-05-20	0
+2016-05-24	1
