@@ -1,0 +1,59 @@
+Stratascratch Medium: City With The Highest and Lowest Income Variance
+
+
+What cities recorded the largest growth and biggest drop in order amount between March 11, 2019, and April 11, 2019. Just compare order amounts on those two dates. Your output should include the names of the cities and the amount of growth/drop.
+
+Tables
+postmates_orders
+postmates_markets
+
+postmates_orders
+Preview
+amount:
+double precision
+city_id:
+bigint
+courier_id:
+bigint
+customer_id:
+bigint
+id:
+bigint
+order_timestamp_utc:
+timestamp without time zone
+seller_id:
+bigint
+postmates_markets
+Preview
+id:
+bigint
+name:
+text
+timezone:
+text
+
+
+with march_orders as (
+    select p.name, sum(amount) as march_amt from postmates_orders o 
+    JOIN postmates_markets p on p.id= o.city_id
+    where o.order_timestamp_utc BETWEEN '2019-03-11 00:00:00' AND '2019-03-12 00:00:00'
+    GROUP BY p.name
+),  april_orders as (
+    select p.name, sum(amount) as april_amt from postmates_orders o 
+    JOIN postmates_markets p on p.id= o.city_id
+    where o.order_timestamp_utc BETWEEN '2019-04-11 00:00:00' AND '2019-04-12 00:00:00'
+    GROUP BY p.name
+)
+
+select COALESCE(a.name, m.name) as city, a.april_amt-m.march_amt as difference from april_orders a
+FULL OUTER JOIN march_orders m on a.name= m.name
+
+Output
+View the output in a separate browser tab
+Execution time: 0.00797 seconds
+
+city	difference
+Seattle	192.74
+Boston	-530.26
+Chicago	-245.21
+Denver	-106.74
