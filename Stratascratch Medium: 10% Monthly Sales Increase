@@ -1,0 +1,80 @@
+Stratascratch Medium: 10% Monthly Sales Increase
+
+You have been asked to compare sales of the current month, May, to those of the previous month, April.
+
+
+The company requested that you only display products whose sales (UNITS SOLD * PRICE) have increased by more than 10% from the previous month to the current month.
+
+
+Your output should include the product id and the percentage growth in sales.
+
+Table
+online_orders
+More about this question
+Hints
+Expected Output
+online_orders
+Preview
+product_id	promotion_id	cost_in_dollars	customer_id	date_sold	units_sold
+1	1	2	1	2022-04-01	4
+3	3	6	3	2022-05-24	6
+1	2	2	10	2022-05-01	3
+1	2	3	2	2022-05-01	9
+2	2	10	2	2022-05-01	1
+9	3	1	2	2022-05-31	5
+6	1	4	1	2022-04-07	8
+6	2	2	1	2022-05-01	12
+3	3	5	1	2022-05-25	4
+3	3	6	2	2022-05-25	6
+3	3	7	3	2022-05-25	7
+2	2	12	3	2022-05-01	1
+8	2	4	3	2022-05-01	4
+9	1	1	10	2022-04-07	2
+9	5	2	3	2022-04-06	20
+10	1	3	2	2022-04-07	4
+10	1	3	1	2022-04-01	5
+3	1	6	1	2022-04-02	10
+2	1	10	10	2022-04-04	8
+2	1	11	3	2022-04-05	6
+4	2	2	2	2022-05-02	7
+5	2	8	1	2022-05-02	7
+2	3	13	1	2022-05-30	3
+1	1	2	2	2022-04-07	3
+10	2	2	3	2022-05-02	9
+11	1	5	1	2022-04-03	9
+5	1	7	10	2022-04-02	9
+5	4	8	1	2022-06-06	8
+1	1	2	2	2022-04-02	9
+5	2	8	15	2022-05-01	2
+8	2	4	3	2022-05-11	1
+8	2	4	3	2022-06-11	1
+10	2	1	4	2022-05-10	19
+cost_in_dollars:
+bigint
+customer_id:
+bigint
+date_sold:
+date
+product_id:
+bigint
+promotion_id:
+bigint
+units_sold:
+bigint
+
+with april_sales as(
+    select product_id, sum(units_sold*cost_in_dollars) as Arpil_Revenue from online_orders
+    where date_sold between '2022-04-01' and '2022-04-30'
+    GROUP BY product_id
+), may_sales as (
+    select product_id, sum(units_sold*cost_in_dollars) as May_Revenue from online_orders
+    where date_sold between '2022-05-01' and '2022-05-31'
+    GROUP BY product_id
+), ten_per as (
+    select product_id, Arpil_Revenue*0.1 AS ten_p_april from april_sales
+)
+
+select a.product_id, (m.May_Revenue-a.Arpil_Revenue)*100/a.Arpil_Revenue as growth from ten_per t
+JOIN april_sales a on a.product_id= t.product_id
+JOIN may_sales m on m.product_id= a.product_id
+where (m.May_Revenue-a.Arpil_Revenue)>t.ten_p_april
