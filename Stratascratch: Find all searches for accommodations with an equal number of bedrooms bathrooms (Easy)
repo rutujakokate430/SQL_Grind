@@ -1,0 +1,6 @@
+Stratascratch: Find all searches for accommodations with an equal number of bedrooms bathrooms (Easy)
+
+Find all searches for accommodations where the number of bedrooms is equal to the number of bathrooms.
+
+select * from airbnb_search_details
+where bedrooms= bathrooms
