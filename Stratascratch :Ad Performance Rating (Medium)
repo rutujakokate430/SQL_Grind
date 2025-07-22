@@ -1,0 +1,30 @@
+Stratascratch :Ad Performance Rating (Medium)
+
+Following a recent advertising campaign, the marketing department wishes to classify its efforts based on the total number of units sold for each product.
+
+
+You have been tasked with calculating the total number of units sold for each product and categorizing ad performance based on the following criteria for items sold:
+
+
+Outstanding: 30+
+Satisfactory: 20 - 29
+Unsatisfactory: 10 - 19
+Poor: 1 - 9
+
+
+Your output should contain the product ID, total units sold in descending order, and its categorized ad performance.
+
+with quantized as (
+    select product_id, SUM(quantity) units_sold from marketing_campaign
+    GROUP BY product_id
+    ORDER BY units_sold desc
+)
+
+select product_id, 
+    case 
+        when units_sold>=30 then 'Outstanding'
+        WHEN units_sold>=20 and units_sold<=29 then 'Satisfactory'
+        when units_sold>=10 and units_sold<=19 then 'Unsatisfactory'
+        when units_sold>=1 and units_sold<=9 then 'Poor'
+    end as category
+from quantized
