@@ -1,0 +1,15 @@
+Stratascratch: Cheapest Properties (Easy)
+
+Find the price of the cheapest property for every city.
+
+with min_property as(
+    select city, MIN(price) as min_price from airbnb_search_details
+    GROUP BY city
+)
+
+select a.* from airbnb_search_details a
+JOIN min_property m on m.city= a.city and a.price= m.min_price
+
+
+
+
