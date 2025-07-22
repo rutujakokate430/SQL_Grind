@@ -1,0 +1,10 @@
+Stratascrath: Super Managers ID 9901 (Medium)
+
+Find managers with at least 7 direct reporting employees. In situations where user is reporting to himself/herself, count that also.
+Output first names of managers.
+
+
+select e1.manager_id from employee e1 
+JOIN employee e2 on e2.id= e1.manager_id
+GROUP BY e1.manager_id
+having COUNT(*)>7
