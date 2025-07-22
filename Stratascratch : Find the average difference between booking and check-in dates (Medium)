@@ -1,0 +1,8 @@
+Stratascratch : Find the average difference between booking and check-in dates (Medium)
+
+Find the average number of days between the booking and check-in dates for AirBnB hosts. Order the results based on the average number of days in descending order.
+avg_days_between_booking_and_checkin DESC
+
+select id_host, AVG(DATEDIFF(ds_checkin, DATE(ts_booking_at))) as avg_days_between_booking_and_checkin from airbnb_contacts
+GROUP BY id_host
+ORDER BY avg_days_between_booking_and_checkin desc
