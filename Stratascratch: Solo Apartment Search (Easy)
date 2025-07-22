@@ -1,0 +1,6 @@
+Stratascratch: Solo Apartment Search (Easy)
+
+Find the search details for apartments where the property type is Apartment and the accommodation is suitable for one person.
+
+select * from airbnb_search_details
+where property_type like 'Apartment' and accommodates=1;
