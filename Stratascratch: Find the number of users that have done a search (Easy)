@@ -1,0 +1,5 @@
+Stratascratch: Find the number of users that have done a search (Easy)
+
+How many unique users have performed a search?
+
+select distinct id_user from airbnb_searches
