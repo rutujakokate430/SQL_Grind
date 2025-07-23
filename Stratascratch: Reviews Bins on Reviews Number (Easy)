@@ -1,0 +1,23 @@
+Stratascratch: Reviews Bins on Reviews Number (Easy)
+
+To better understand how the number of reviews affects accommodation prices, classify each listing based on its number of reviews (use column number_of_reviews) into the following categories:
+
+
+•  0 reviews: "NO"
+•  1 to 5 reviews: "FEW"
+•  6 to 15 reviews: "SOME"
+•  16 to 40 reviews: "MANY"
+•  More than 40 reviews: "A LOT"
+
+
+For each record, output the price along with the corresponding category that describes its review count.
+
+select *,
+case when number_of_reviews=0 then  "NO"
+    when number_of_reviews>=1 and number_of_reviews<=5 then "FEW"
+    when number_of_reviews>=6 and number_of_reviews<=15 then "SOME"
+    when number_of_reviews>=16 and number_of_reviews<=40 then "MANY"
+    when number_of_reviews>40 then "A LOT"
+END as price_category
+
+from airbnb_search_details;
