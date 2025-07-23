@@ -1,0 +1,23 @@
+Stratascratch: Find the count of verified and non-verified Airbnb hosts (Medium)
+
+Find how many hosts are verified by the Airbnb staff and how many aren't. Assume that in each row you have a different host.
+
+
+with verified as(
+    select count(*) as verified_hosts from airbnb_search_details
+    where host_identity_verified= 't'
+), unverified as (
+    select count(*) as unverified_hosts from airbnb_search_details
+    where host_identity_verified= 'f'
+)
+
+SELECT verified_hosts, unverified_hosts from verified, unverified
+
+
+Without cte:
+SELECT
+    SUM(CASE WHEN host_identity_verified = 't' THEN 1 ELSE 0 END) AS verified_hosts,
+    SUM(CASE WHEN host_identity_verified = 'f' THEN 1 ELSE 0 END) AS unverified_hosts
+FROM airbnb_search_details;
+
+
