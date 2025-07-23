@@ -1,0 +1,46 @@
+Stratascratch: Host Popularity Rental Prices (Medium)
+
+You are given a table named airbnb_host_searches that contains data for rental property searches made by users. Determine the minimum, average, and maximum rental prices for each popularity-rating bucket. A popularity-rating bucket should be assigned to every record based on its number_of_reviews (see rules below).
+
+
+The host’s popularity rating is defined as below:
+•   0 reviews: "New"
+•   1 to 5 reviews: "Rising"
+•   6 to 15 reviews: "Trending Up"
+•   16 to 40 reviews: "Popular"
+•   More than 40 reviews: "Hot"
+
+
+Tip: The id column in the table refers to the search ID.
+
+
+Output host popularity rating and their minimum, average and maximum rental prices. Order the solution by the minimum price.
+
+select
+case 
+    when number_of_reviews=0 THEN "New"
+    when number_of_reviews>=1 and number_of_reviews<=5 THEN "Rising"
+    when number_of_reviews>=6 and number_of_reviews<=15 THEN "Trending Up"
+    when number_of_reviews>=16 and number_of_reviews<=40 THEN "Popular"
+    when number_of_reviews>40 THEN "Hot"
+END as Host_popularity_rating, 
+MIN(price) as min_price, 
+MAX(price) as max_price,
+AVG(price) as avg_price
+from airbnb_host_searches
+group by Host_popularity_rating
+order by min_price
+
+
+Output
+Execution time: 0.00563 seconds
+
+
+
+View the output in a new tab
+Host_popularity_rating	min_price	max_price	avg_price
+Popular	270.81	667.83	472.81
+New	313.55	741.76	516.67
+Hot	340.12	633.51	467.47
+Rising	355.53	717.01	506.65
+Trending Up	361.09	685.65	476.28
