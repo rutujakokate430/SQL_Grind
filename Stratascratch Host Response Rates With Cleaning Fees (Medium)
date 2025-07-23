@@ -1,0 +1,78 @@
+Stratascratch Host Response Rates With Cleaning Fees (Medium)
+
+Find the average host response rate with a cleaning fee for each zipcode. Present the results as a percentage along with the zip code value.
+Convert the column 'host_response_rate' from TEXT to NUMERIC using type casts and string processing (take missing values as NULL).
+Order the result in ascending order based on the average host response rater after cleaning.
+
+
+select zipcode, AVG(CAST(REPLACE(host_response_rate, "%", "") AS DOUBLE)) from airbnb_search_details
+WHERE cleaning_fee=1 and cleaning_fee is not null 
+and host_response_rate is not null
+group by zipcode
+
+zipcode	AVG(CAST(REPLACE(host_response_rate, "%", "") AS DOUBLE))
+94118	100
+11211	93
+90703	70
+90265	78.5
+90046	90
+90803	91
+90275	100
+90501	90
+90704	100
+90277	100
+91364	100
+91780	100
+11216	100
+91405	100
+10027	88.43
+90028	25
+11419	100
+11221	100
+11106	80
+91302	100
+90045	100
+90048	91.5
+90066	100
+10474	100
+11231	100
+11355	99
+90290	100
+20005	100
+91506	100
+2125	100
+11509	100
+11218	100
+94110	90
+90039	100
+90024	100
+90292	89
+90254	100
+90266	100
+90802	100
+90005	100
+90015	100
+90057	80
+60657	100
+10035	67
+10030	100
+90064	100
+90250	100
+10037	100
+10026	100
+10039	76
+90249	100
+10029	100
+90272	100
+90026	100
+11692	100
+11103	100
+60605	100
+10009	100
+91303	98
+90278	100
+10065	80
+11206	100
+90025	100
+91324	0
+90291	97
