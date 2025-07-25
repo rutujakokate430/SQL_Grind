@@ -1,0 +1,28 @@
+Stratascratch: Find the unique room types(Medium)
+
+Find the unique room types(filter room types column). Output each unique room types in its own row.
+
+with RECURSIVE substring_extraction as (
+    SELECT id_user, 
+    TRIM(substring_index(filter_room_typeS, ',', 1)) as room_type,
+    SUBSTRING(filter_room_types, LENGTH(SUBSTRING_INDEX(filter_room_types, ',', 1)) +2) AS rest
+    FROM airbnb_searches
+    where filter_room_types is not null
+
+    UNION ALL
+    
+    SELECT id_user, 
+    TRIM(substring_index(rest, ',', 1)) as room_type,
+    SUBSTRING(rest, LENGTH(SUBSTRING_INDEX(rest, ',', 1)) +2) AS rest
+    FROM substring_extraction
+    where rest is not null and rest !=''
+)
+
+select distinct room_type from substring_extraction
+ORDER BY room_type
+
+
+room_type
+Entire home/apt
+Private room
+Shared room
