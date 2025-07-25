@@ -1,0 +1,8 @@
+Stratascratch: Find the number of people on Airbnb (Easy)
+
+Find the number of people that made a search on Airbnb.
+
+select count(distinct id_user) as total_users from airbnb_searches;
+
+total_users
+66
