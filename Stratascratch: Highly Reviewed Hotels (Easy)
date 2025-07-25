@@ -1,0 +1,7 @@
+Stratascratch: Highly Reviewed Hotels (Easy)
+
+
+List all hotels along with their total number of reviews using the total_number_of_reviews column. Sort the results by total reviews in descending order.
+
+select hotel_name, total_number_of_reviews from hotel_reviews
+ORDER BY total_number_of_reviews desc
