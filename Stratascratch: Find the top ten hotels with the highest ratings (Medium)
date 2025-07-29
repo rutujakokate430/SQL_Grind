@@ -1,0 +1,18 @@
+Stratascratch: Find the top ten hotels with the highest ratings (Medium)
+
+select hotel_name, MAX(average_score) from hotel_reviews
+group by hotel_name
+order by average_score DESC
+limit 10
+
+hotel_name	MAX(average_score)
+41	9.6
+Ham Yard Hotel	9.5
+Rosewood London	9.4
+Batty Langley s	9.4
+Ambassade Hotel	9.3
+Hotel Berna	9.2
+The Chesterfield Mayfair	9.1
+Hotel Le Six	9.1
+Knightsbridge Hotel	9.1
+The Nadler Kensington	9
