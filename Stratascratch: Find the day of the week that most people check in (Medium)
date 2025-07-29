@@ -1,0 +1,19 @@
+Stratascratch: Find the day of the week that most people check in (Medium)
+
+with mapped as(
+select *, WEEKDAY(ds_checkin) AS day from airbnb_contacts
+)
+
+select day, count(*) as checkin_count from mapped 
+group by day
+ORDER BY day
+
+
+day	checkin_count
+0	8
+1	5
+2	10
+3	17
+4	33
+5	16
+6	11
