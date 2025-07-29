@@ -1,0 +1,10 @@
+Stratascratch: Cheapest Neighborhood With Real Beds And Internet (Medium)
+
+
+select neighbourhood from airbnb_search_details
+where bed_type= 'Real Bed' and amenities LIKE '%Wireless Internet%' AND property_type='Villa'
+order by price
+LIMIT 1
+
+neighbourhood
+Long Beach
