@@ -1,0 +1,17 @@
+Stratascratch: Find the top two hotels with the most negative reviews (Medium)
+
+select hotel_name, 
+sum(CASE 
+    WHEN negative_review!='No Negative' then 1 else 0 
+end) as total_negative
+from hotel_reviews
+group by hotel_name
+order by total_negative desc
+limit 2
+
+
+
+
+hotel_name	total_negative
+Hotel Arena	13
+Ramada Apollo Amsterdam Centre	3
