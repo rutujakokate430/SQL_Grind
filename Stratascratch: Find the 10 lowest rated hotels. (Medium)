@@ -1,0 +1,18 @@
+Stratascratch: Find the 10 lowest rated hotels. (Medium)
+
+select hotel_name, AVG(reviewer_score) as avg_rating from hotel_reviews
+group by hotel_name
+ORDER BY avg_rating 
+LIMIT 10
+
+hotel_name	avg_rating
+Golden Tulip Amsterdam Riverside	2.5
+Sall s Hotel Pere IV	2.5
+Millennium Hotel London Mayfair	2.9
+NH Amsterdam Centre	3.3
+NH Collection Amsterdam Barbizon Palace	3.8
+Best Western Blue Tower Hotel	4.6
+Austria Trend Parkhotel Sch nbrunn Wien	5
+NH City Centre Amsterdam	5.05
+NH Carlton Amsterdam	5.25
+DoubleTree By Hilton London Excel	5.4
