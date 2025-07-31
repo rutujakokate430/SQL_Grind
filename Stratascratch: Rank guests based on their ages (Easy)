@@ -1,0 +1,18 @@
+Stratascratch: Rank guests based on their ages (Easy)
+
+select guest_id, RANK() OVER(ORDER BY age DESC) as age_rank from airbnb_guests
+order by age desc
+
+guest_id	age_rank
+8	1
+5	2
+6	3
+9	4
+10	5
+2	6
+7	6
+3	8
+11	8
+1	10
+0	11
+4	12
