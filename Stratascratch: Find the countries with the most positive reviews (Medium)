@@ -1,0 +1,46 @@
+Stratascratch: Find the countries with the most positive reviews (Medium)
+
+    select reviewer_nationality, 
+    SUM(case 
+        when positive_review !='No Negative' THEN 1 ELSE 0
+        END) AS total_positive
+    from hotel_reviews
+    group by reviewer_nationality
+    HAVING total_positive>0
+    ORDER BY total_positive desc
+
+reviewer_nationality	total_positive
+United Kingdom	36
+United States of America	11
+Australia	6
+France	4
+Netherlands	4
+Israel	3
+Ireland	3
+Switzerland	3
+Turkey	2
+Greece	2
+India	2
+Singapore	2
+South Africa	1
+Romania	1
+Portugal	1
+Spain	1
+Malaysia	1
+Malta	1
+Hungary	1
+Canada	1
+Japan	1
+Cyprus	1
+Iraq	1
+Italy	1
+Norway	1
+Lebanon	1
+Czech Republic	1
+New Zealand	1
+Germany	1
+China	1
+Tunisia	1
+Guernsey	1
+Kuwait	1
+Iran	1
