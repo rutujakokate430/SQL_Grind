@@ -1,0 +1,10 @@
+Stratascratch: Guest Or Host Kindness (Easy)
+
+select ROUND(max(avg_score), 2) as Higher FROM
+(SELECT from_type, AVG(review_score) AS avg_score
+FROM airbnb_reviews
+GROUP BY from_type) AS sub
+
+
+Higher
+5.29
