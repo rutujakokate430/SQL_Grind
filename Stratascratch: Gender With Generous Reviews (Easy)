@@ -1,0 +1,9 @@
+Stratascratch: Gender With Generous Reviews (Easy)
+
+select gender, AVG(review_score) AS avg_review_Score from airbnb_reviews r
+JOIN airbnb_guests g on g.guest_id= r.from_type
+where from_type= 'guest'
+group by gender
+
+gender	avg_review_Score
+M	5.2886
