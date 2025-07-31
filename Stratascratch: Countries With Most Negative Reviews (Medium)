@@ -1,0 +1,44 @@
+Stratascratch: Countries With Most Negative Reviews (Medium)
+
+with neg_cte as (
+    select reviewer_nationality, 
+    SUM(case 
+        when negative_review !='No Negative' THEN 1 ELSE 0
+        END) AS total_negative
+    from hotel_reviews
+    group by reviewer_nationality
+)
+
+select * from neg_cte 
+WHERE total_negative >0
+order by total_negative DESC
+
+reviewer_nationality	total_negative
+United Kingdom	30
+United States of America	9
+Australia	5
+France	4
+Netherlands	4
+Ireland	3
+Israel	2
+Greece	2
+Switzerland	2
+Japan	1
+South Africa	1
+Hungary	1
+Malta	1
+Malaysia	1
+Spain	1
+Portugal	1
+Romania	1
+Canada	1
+Iraq	1
+New Zealand	1
+Germany	1
+China	1
+Guernsey	1
+Turkey	1
+India	1
+Kuwait	1
+Singapore	1
+Iran	1
