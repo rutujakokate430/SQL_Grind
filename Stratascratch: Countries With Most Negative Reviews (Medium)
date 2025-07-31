@@ -13,6 +13,17 @@ select * from neg_cte
 WHERE total_negative >0
 order by total_negative DESC
 
+OR 
+
+    select reviewer_nationality, 
+    SUM(case 
+        when negative_review !='No Negative' THEN 1 ELSE 0
+        END) AS total_negative
+    from hotel_reviews
+    group by reviewer_nationality
+    HAVING total_negative>0
+    ORDER BY total_negative desc
+
 reviewer_nationality	total_negative
 United Kingdom	30
 United States of America	9
