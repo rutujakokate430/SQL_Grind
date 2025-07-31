@@ -1,0 +1,20 @@
+Stratascratch: Hosts' Abroad Apartments (Medium)
+
+
+select COUNT(DISTINCT a.host_id) AS total_non_national_hosts from airbnb_apartments a
+LEFT JOIN airbnb_hosts h 
+ON h.host_id= a.host_id
+and h.nationality!=a.country
+WHERE h.host_id is not null
+
+OR 
+
+SELECT COUNT(DISTINCT a.host_id) AS total_non_national_hosts 
+FROM airbnb_apartments a
+INNER JOIN airbnb_hosts h 
+    ON h.host_id = a.host_id
+WHERE h.nationality != a.country;
+
+
+total_non_national_hosts
+3
