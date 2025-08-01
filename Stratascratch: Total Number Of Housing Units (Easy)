@@ -1,0 +1,15 @@
+Stratascratch: Total Number Of Housing Units (Easy)
+
+select year, sum(midwest+northeast+south+west)*1000 as total_housing_units from housing_units_completed_us
+group by year
+
+year	total_housing_units
+2009	794500
+2013	764400
+2014	462800
+2006	1979500
+2012	649000
+2008	1119500
+2010	651700
+2011	585000
+2007	1503000
