@@ -1,0 +1,10 @@
+Stratascratch: Number Of Units Per Nationality (Medium)
+
+select h.nationality, count(distinct u.unit_id) AS Total_Apts from airbnb_hosts h
+JOIN airbnb_units u on u.host_id= h.host_id
+where h.age< 30 AND u.unit_type='Apartment'
+group by h.nationality
+order by Total_Apts desc
+
+nationality	total_apts
+USA	2
