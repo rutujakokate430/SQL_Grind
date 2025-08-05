@@ -1,0 +1,14 @@
+Stratascratch: Find the total number of available beds per hosts' nationality (Medium)
+
+select h.nationality, sum(n_bedrooms) as total_beds from airbnb_apartments a
+JOIN airbnb_hosts h ON h.host_id= a.host_id
+group by h.nationality
+order by total_beds desc
+
+nationality	total_beds
+USA	232
+Luxembourg	224
+China	36
+Brazil	32
+Australia	12
+Mali	12
