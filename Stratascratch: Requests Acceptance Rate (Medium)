@@ -1,0 +1,7 @@
+Stratascratch: Requests Acceptance Rate (Medium)
+
+select sum(case when ts_accepted_at IS NOT NULL THEN 1 ELSE 0 END) *100.0/ count(*) as rate from airbnb_contacts;
+
+
+rate
+39
