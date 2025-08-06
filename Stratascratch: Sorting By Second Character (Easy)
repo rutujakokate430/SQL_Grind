@@ -1,0 +1,26 @@
+Stratascratch: Sorting By Second Character (Easy)
+
+select * from random_id
+order by SUBSTRING(id, 2, 1)
+
+id
+2ABS5
+3ASD1
+4AOS9
+2CBS6
+3CGY1
+3CUY1
+3CYS1
+2DQS4
+2DYS7
+3DUU1
+4DSS1
+5MQS2
+5NES1
+3NOS8
+2POI9
+2PTY1
+2SUI8
+5TLS2
+3TQS1
+5ZQS3
