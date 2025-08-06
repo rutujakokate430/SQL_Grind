@@ -1,0 +1,13 @@
+Stratascratch: Homework Results (Medium)
+
+select s.student_firstname, AVG(h.grade) as avg_grade, 
+sum(case when h.grade is not null then 1 else 0 end)*1.0/ count(*) as completion_rate
+from allstate_students s 
+JOIN allstate_homework h on s.student_id= h.student_id
+GROUP BY s.student_id, s.student_firstname
+
+student_firstname	avg_grade	completion_rate
+Joan 	8	0.3333333333333333
+Marie 	6.33	1
+Hugo 		0
+Marie 	5	0.6666666666666666
