@@ -1,0 +1,6 @@
+Number of Shipments Per Month (Easy)
+
+select to_char(shipment_date, 'YYYY-MM') as year_month, Count(distinct (shipment_id, sub_id)) as shipment_cnt from amazon_shipment
+group by year_month
+
+
